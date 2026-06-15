@@ -430,7 +430,8 @@ spec:
       action: publish:gitlab
       if: ${{ (parameters.publishAndBuild.publishToSCM) and (steps['prepare-publish'].output.createNewRepo) and (parameters.publishAndBuild.sourceControlProvider.provider == 'gitlab') }}
       input:
-        repoUrl: ${{ steps['prepare-publish'].output.generatedRepoUrl }}
+        # repoUrl: ${{ steps['prepare-publish'].output.generatedRepoUrl }}
+        repoUrl: gitlab.zach.lab?owner=${{ parameters.publishAndBuild.sourceControlProvider.org }}&repo=${{ parameters.publishAndBuild.sourceControlProvider.repoName }}
         defaultBranch: 'main'
         repoVisibility: 'public'
         # token: ${{ secrets.USER_OAUTH_TOKEN }}
@@ -453,7 +454,8 @@ spec:
       action: publish:gitlab:merge-request
       if: ${{ parameters.publishAndBuild.publishToSCM and (not steps['prepare-publish'].output.createNewRepo) and (parameters.publishAndBuild.sourceControlProvider.provider == 'gitlab') }}
       input:
-        repoUrl: ${{ steps['prepare-publish'].output.generatedRepoUrl }}
+        # repoUrl: ${{ steps['prepare-publish'].output.generatedRepoUrl }}
+        repoUrl: gitlab.zach.lab?owner=${{ parameters.publishAndBuild.sourceControlProvider.org }}&repo=${{ parameters.publishAndBuild.sourceControlProvider.repoName }}
         branchName: ${{ steps['prepare-publish'].output.generatedBranchName }}
         title: ${{ steps['prepare-publish'].output.generatedTitle }}
         description: ${{ steps['prepare-publish'].output.generatedDescription }}
