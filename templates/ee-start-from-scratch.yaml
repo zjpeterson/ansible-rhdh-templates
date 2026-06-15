@@ -466,7 +466,8 @@ spec:
       action: catalog:register
       if: ${{ parameters.publishAndBuild.publishToSCM }}
       input:
-        catalogInfoUrl: ${{ steps['prepare-publish'].output.generatedCatalogInfoUrl }}
+        # catalogInfoUrl: ${{ steps['prepare-publish'].output.generatedCatalogInfoUrl }}
+        catalogInfoUrl: ${{ steps['prepare-publish'].output.generatedCatalogInfoUrl | replace("gitlab.com", "gitlab.zach.lab") }}
         optional: true
 
     - id: dispatch-ee-build
@@ -490,7 +491,8 @@ spec:
 
     links:
       - title: ${{ parameters.publishAndBuild.sourceControlProvider.providerLabel }} Repository
-        url: ${{ steps['prepare-publish'].output.generatedFullRepoUrl }}
+        # url: ${{ steps['prepare-publish'].output.generatedFullRepoUrl }}
+        url: ${{ steps['prepare-publish'].output.generatedFullRepoUrl | replace("gitlab.com", "gitlab.zach.lab") }}
         if: ${{ (parameters.publishAndBuild.publishToSCM) and (steps['prepare-publish'].output.createNewRepo) }}
         icon: ${{ parameters.publishAndBuild.sourceControlProvider.provider }}
 
