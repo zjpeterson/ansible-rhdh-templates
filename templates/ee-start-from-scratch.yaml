@@ -248,7 +248,7 @@ spec:
                             host: github.com
                           - label: Gitlab
                             provider: gitlab
-                            host: gitlab.com
+                            host: gitlab.zach.lab
                         requestUserCredentials:
                           secretsKey: USER_OAUTH_TOKEN
                           additionalScopes:
